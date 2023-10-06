@@ -1,0 +1,11 @@
+##security:
+##  oauth2:
+##    client:
+##      clientId: my_client_id_lukac
+##      clientSecret: myClientSecret
+##      authorized-grant-types: authorization_code,refresh_token,password
+##      scope: openid
+##    resource.jwt:
+##      key-store: keystore.jks
+##      key-store-password: dp_backend_key_password_23
+##      key-alias: dp_backend_key

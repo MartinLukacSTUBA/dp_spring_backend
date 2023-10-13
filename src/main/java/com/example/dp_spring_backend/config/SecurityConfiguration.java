@@ -25,9 +25,9 @@ public class SecurityConfiguration {
 
 
     private static final String[] WHITE_LIST_URL = {
-            "/api/v1/auth/**"
+            "/api/v1/auth/**",
+            "/api/v1/employee/**"
     };
-
 
 
 
@@ -36,7 +36,7 @@ public class SecurityConfiguration {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req ->
-                        req.requestMatchers(HttpMethod.POST,"/api/v1/auth/**")
+                        req.requestMatchers(HttpMethod.POST,WHITE_LIST_URL)
                                 .permitAll()
                                 .anyRequest()
                                 .authenticated()

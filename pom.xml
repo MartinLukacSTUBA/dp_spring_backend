@@ -85,9 +85,12 @@
 			<version>6.1.4</version>
 		</dependency>
 
-
-
-
+		<!-- library for OBD -->
+		<dependency>
+			<groupId>com.github.pires</groupId>
+			<artifactId>obd-java-api</artifactId>
+			<version>1.0</version>
+		</dependency>
 
 
 

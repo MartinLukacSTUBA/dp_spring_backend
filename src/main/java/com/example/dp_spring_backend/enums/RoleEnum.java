@@ -1,6 +1,6 @@
 package com.example.dp_spring_backend.enums;
 
-public enum Role {
+public enum RoleEnum {
     USER,
     ADMIN
 }

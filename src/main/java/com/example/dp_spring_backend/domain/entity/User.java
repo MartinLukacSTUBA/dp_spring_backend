@@ -1,6 +1,6 @@
 package com.example.dp_spring_backend.domain.entity;
 
-import com.example.dp_spring_backend.enums.Role;
+import com.example.dp_spring_backend.enums.RoleEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,6 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -23,13 +24,21 @@ public class User implements UserDetails{
 
     @Id
     @GeneratedValue
+    @Column(name = "id")
     private Long id;
+    @Column(name = "firstname")
     private String firstname;
+    @Column(name = "lastname")
     private String lastname;
+    @Column(name = "email")
     private String email;
+    @Column(name = "password")
     private String password;
+    @OneToMany(mappedBy = "currentUser", cascade = CascadeType.ALL)
+    private List<CarEntity> carEntities = new ArrayList<>();
     @Enumerated(EnumType.STRING)
-    private Role role;
+    @Column(name = "role")
+    private RoleEnum role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

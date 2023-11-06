@@ -1,0 +1,62 @@
+package com.example.dp_spring_backend.service;
+
+import com.example.dp_spring_backend.domain.entity.CarDiagnosticEntity;
+import com.example.dp_spring_backend.domain.entity.User;
+import com.example.dp_spring_backend.domain.inputDTO.CarDiagnosticInputDTO;
+import com.example.dp_spring_backend.mapper.CarDiagnosticMapper;
+import com.example.dp_spring_backend.mapper.UserMapper;
+import com.example.dp_spring_backend.outputDTO.CarDiagnosticOutputDTO;
+import com.example.dp_spring_backend.repository.CarDiagnosticRepository;
+import com.example.dp_spring_backend.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Service
+@RequiredArgsConstructor
+public class CarDiagnosticService {
+
+    private final CarDiagnosticRepository carDiagnosticRepository;
+    private final UserRepository userRepository;
+
+    private final UserService userService;
+
+    private final UserMapper userMapper;
+    private final CarDiagnosticMapper carDiagnosticMapper;
+
+    public void uploadCarDiagnosticEntity(CarDiagnosticInputDTO carDiagnosticInputDTO) {
+        var carDiagnosticData = CarDiagnosticEntity.builder()
+                .data1(carDiagnosticInputDTO.getData1())
+                .data2(carDiagnosticInputDTO.getData2())
+                .recorderId(userService.findById(carDiagnosticInputDTO.getRecorderId()))
+                .diagnosticTimeDate(LocalDateTime.now())
+                .build();
+
+        carDiagnosticRepository.save(carDiagnosticData);
+    }
+
+    public List<CarDiagnosticOutputDTO> getCarDiagnosticMadeByLoggedUser() {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        if (auth != null) {
+            UserDetails userDetails = (UserDetails) auth.getPrincipal();
+//            String userId = userDetails.getUsername(); // Assuming the username is used as the user's ID
+            User user = userRepository.findByEmail(userDetails.getUsername());
+            List<CarDiagnosticEntity> carDiagnosticEntityList = carDiagnosticRepository.findByRecorderId_Id(user.getId());
+
+            List<CarDiagnosticOutputDTO> carDiagnosticOutputDTOList = carDiagnosticEntityList.stream()
+                    .map(carDiagnosticMapper::toCarDiagnosticOutputDTO)
+                    .toList();
+
+            return carDiagnosticOutputDTOList;
+           // return carDiagnosticMapper.toCarDiagnosticOutputDTOList(carDiagnosticRepository.findByRecorderId_Id(user.getId()));
+        }
+        return null;
+    }
+}

@@ -4,6 +4,7 @@ import com.example.dp_spring_backend.domain.inputDTO.CarDiagnosticInputDTO;
 import com.example.dp_spring_backend.outputDTO.CarDiagnosticOutputDTO;
 import com.example.dp_spring_backend.service.CarDiagnosticService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,10 +18,15 @@ public class CarDiagnosticController {
     private final CarDiagnosticService carDiagnosticService;
     @PostMapping
     public ResponseEntity<?> uploadCarDiagnosticEntity(@RequestBody CarDiagnosticInputDTO carDiagnosticInputDTO) {
-        System.out.println("jozjo");
-        carDiagnosticService.uploadCarDiagnosticEntity(carDiagnosticInputDTO);
-        return ResponseEntity.ok("Ok");
+        try {
+            carDiagnosticService.uploadCarDiagnosticEntity(carDiagnosticInputDTO);
+            return ResponseEntity.ok().build(); // Status code 200 if everything is fine
+        } catch (Exception e) {
+            e.printStackTrace(); // Log the error for debugging purposes
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal server error"); // Status code 500 and error message
+        }
     }
+
 
     @GetMapping
     public ResponseEntity<List<CarDiagnosticOutputDTO>> getCarDiagnosticMadeByLoggedUser(){

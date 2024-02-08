@@ -6,6 +6,7 @@ import com.example.dp_spring_backend.domain.inputDTO.CarDiagnosticInputDTO;
 import com.example.dp_spring_backend.mapper.CarDiagnosticMapper;
 import com.example.dp_spring_backend.mapper.UserMapper;
 import com.example.dp_spring_backend.outputDTO.CarDiagnosticOutputDTO;
+import com.example.dp_spring_backend.outputDTO.UserInfoOutputDTO;
 import com.example.dp_spring_backend.repository.CarDiagnosticRepository;
 import com.example.dp_spring_backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -30,10 +31,16 @@ public class CarDiagnosticService {
     private final CarDiagnosticMapper carDiagnosticMapper;
 
     public void uploadCarDiagnosticEntity(CarDiagnosticInputDTO carDiagnosticInputDTO) {
+        UserInfoOutputDTO userInfoOutputDTO = userService.getLoggedUserInfo();
+        User userr = userRepository.findByEmail(userInfoOutputDTO.getEmail());
         var carDiagnosticData = CarDiagnosticEntity.builder()
-                .data1(carDiagnosticInputDTO.getData1())
-                .data2(carDiagnosticInputDTO.getData2())
-                .recorderId(userService.findById(carDiagnosticInputDTO.getRecorderId()))
+                .averageRpm(carDiagnosticInputDTO.getAverageRpm())
+                .averageEngineLoad(carDiagnosticInputDTO.getAverageEngineLoad())
+                .averageSpeed(carDiagnosticInputDTO.getAverageSpeed())
+                .averageFuelPressure(carDiagnosticInputDTO.getAverageFuelPressure())
+                .averageEngineTemperature(carDiagnosticInputDTO.getAverageEngineTemperature())
+                .averageThrottlePosition(carDiagnosticInputDTO.getAverageThrottlePosition())
+                .recorderId(userr)
                 .diagnosticTimeDate(LocalDateTime.now())
                 .build();
 

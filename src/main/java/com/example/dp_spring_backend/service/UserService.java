@@ -19,15 +19,20 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     private final JwtService jwtService;
-    public UserInfoOutputDTO getLoggedUserInfo(){
-
+    public UserInfoOutputDTO getLoggedUserInfo() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         if (auth != null) {
-            UserDetails userDetails = (UserDetails) auth.getPrincipal();
-//            String userId = userDetails.getUsername(); // Assuming the username is used as the user's ID
-            User user = userRepository.findByEmail(userDetails.getUsername());
-            return userMapper.toUserInfoOutputDTO(user);
+            Object principal = auth.getPrincipal();
+            if (principal instanceof UserDetails) {
+                UserDetails userDetails = (UserDetails) principal;
+                User user = userRepository.findByEmail(userDetails.getUsername());
+                return userMapper.toUserInfoOutputDTO(user);
+            } else if (principal instanceof String) {
+                String username = (String) principal;
+                User user = userRepository.findByEmail(username);
+                return userMapper.toUserInfoOutputDTO(user);
+            }
         }
         return null;
     }

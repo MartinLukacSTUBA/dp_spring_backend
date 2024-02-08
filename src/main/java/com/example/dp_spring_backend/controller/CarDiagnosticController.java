@@ -17,6 +17,7 @@ public class CarDiagnosticController {
     private final CarDiagnosticService carDiagnosticService;
     @PostMapping
     public ResponseEntity<?> uploadCarDiagnosticEntity(@RequestBody CarDiagnosticInputDTO carDiagnosticInputDTO) {
+        System.out.println("jozjo");
         carDiagnosticService.uploadCarDiagnosticEntity(carDiagnosticInputDTO);
         return ResponseEntity.ok("Ok");
     }

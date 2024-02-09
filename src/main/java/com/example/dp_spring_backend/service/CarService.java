@@ -57,4 +57,8 @@ public class CarService {
     public CarEntity findById(Long id) throws CarNotFoundException{
         return carEntityRepository.findById(id).orElseThrow(()-> new CarNotFoundException(id));
     }
+
+    public void delete(Long id) {
+        carEntityRepository.deleteById(id);
+    }
 }

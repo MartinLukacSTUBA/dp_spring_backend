@@ -1,0 +1,31 @@
+package com.example.dp_spring_backend.domain.DTO.input;
+
+import com.example.dp_spring_backend.enums.CarTypeEnum;
+import com.example.dp_spring_backend.enums.FuelEnum;
+import com.example.dp_spring_backend.enums.TransmittionTypeEnum;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
+
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class CreateCarInputDTO {
+
+    private String vim;
+    private String name;
+    private CarTypeEnum carTypeEnum;
+    private TransmittionTypeEnum transmittionTypeEnum;
+    private Long userId;
+    private String vehicleNumberPlate;
+    private LocalDate registration;
+    private LocalDate registration_expiration;
+    private LocalDate lastService;
+    private FuelEnum fuel;
+    private String note;
+
+}

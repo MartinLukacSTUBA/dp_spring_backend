@@ -1,7 +1,9 @@
 package com.example.dp_spring_backend.controller;
 
 import com.example.dp_spring_backend.domain.DTO.CarBasicInfoDTO;
+import com.example.dp_spring_backend.domain.DTO.input.CarUpdateInputDTO;
 import com.example.dp_spring_backend.domain.DTO.input.CreateCarInputDTO;
+import com.example.dp_spring_backend.domain.DTO.output.CarOutputDTO;
 import com.example.dp_spring_backend.domain.entity.CarEntity;
 import com.example.dp_spring_backend.enums.FuelEnum;
 import com.example.dp_spring_backend.service.CarService;
@@ -49,6 +51,35 @@ public class CarController {
         }catch (Exception e){
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,e.getMessage(),e);
         }
+    }
 
+    @GetMapping("/all-basic-info")
+    public ResponseEntity<List<CarBasicInfoDTO>> getBasicInfoCarData(){
+        try{
+            List<CarBasicInfoDTO> carBasicInfoDTOList = carService.getAllBasicInfoDTO();
+            return ResponseEntity.ok(carBasicInfoDTOList);
+        }catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,e.getMessage(),e);
+        }
+    }
+
+    @GetMapping("/details/{carId}")
+    public ResponseEntity<CarOutputDTO> getDetails(@PathVariable Long carId){
+        try{
+            CarOutputDTO carOutputDTO = carService.getCarDetailsDTO(carId);
+            return ResponseEntity.ok(carOutputDTO);
+        }catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,e.getMessage(),e);
+        }
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody CarUpdateInputDTO inputDTO){
+        try{
+            carService.update(id,inputDTO);
+            return ResponseEntity.ok().build();
+        }catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,e.getMessage(),e);
+        }
     }
 }

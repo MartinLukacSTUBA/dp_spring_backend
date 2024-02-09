@@ -10,7 +10,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -34,8 +33,6 @@ public class User implements UserDetails{
     private String email;
     @Column(name = "password")
     private String password;
-    @OneToMany(mappedBy = "currentUser", cascade = CascadeType.ALL)
-    private List<CarEntity> carEntities = new ArrayList<>();
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
     private RoleEnum role;

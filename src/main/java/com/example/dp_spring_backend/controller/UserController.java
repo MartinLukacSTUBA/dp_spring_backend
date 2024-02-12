@@ -1,10 +1,17 @@
 package com.example.dp_spring_backend.controller;
 
+import com.example.dp_spring_backend.domain.DTO.UserBasicInfoDTO;
+import com.example.dp_spring_backend.domain.DTO.input.CreateUserInputDTO;
+import com.example.dp_spring_backend.domain.DTO.output.UserOutputDTO;
 import com.example.dp_spring_backend.outputDTO.UserInfoOutputDTO;
 import com.example.dp_spring_backend.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -23,6 +30,56 @@ public class UserController {
     public ResponseEntity<UserInfoOutputDTO> getUserInfo(){
         return ResponseEntity.ok(userService.getLoggedUserInfo());
     }
+
+    @PostMapping("create")
+    public ResponseEntity<UserBasicInfoDTO> createUser(@RequestBody CreateUserInputDTO inputDTO){
+        try{
+            UserBasicInfoDTO userBasicInfoDTO = userService.create(inputDTO);
+            return ResponseEntity.ok(userBasicInfoDTO);
+        }catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,e.getMessage(),e);
+        }
+    }
+    @GetMapping("/all-basic-info")
+    public ResponseEntity<List<UserBasicInfoDTO>> getBasicInfoUserData(){
+        try{
+            List<UserBasicInfoDTO> userBasicInfoDTOS = userService.getAllBasicInfoDTO();
+            return ResponseEntity.ok(userBasicInfoDTOS);
+        }catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,e.getMessage(),e);
+        }
+    }
+
+    @GetMapping("/details/{userId}")
+    public ResponseEntity<UserOutputDTO> getDetails(@PathVariable Long userId){
+        try{
+            UserOutputDTO userOutputDTO = userService.getUserDetailsDTO(userId);
+            return ResponseEntity.ok(userOutputDTO);
+        }catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,e.getMessage(),e);
+        }
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody CreateUserInputDTO inputDTO){
+        try{
+            userService.update(id,inputDTO);
+            return ResponseEntity.ok().build();
+        }catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,e.getMessage(),e);
+        }
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<?> delete(@PathVariable Integer id){
+        try{
+            userService.delete(id);
+            return ResponseEntity.ok().build();
+        }catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,e.getMessage(),e);
+        }
+    }
+
 
 
 

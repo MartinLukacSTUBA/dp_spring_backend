@@ -32,7 +32,7 @@ public class CarService {
     }
 
     public List<CarBasicInfoDTO> getAllBasicInfoDTO() {
-        List<CarEntity> allCars = carEntityRepository.findAll();
+        List<CarEntity> allCars = carEntityRepository.findAllByOrderByIdAsc();
         return carEntityMapper.toListBasicInfoDTO(allCars);
     }
 

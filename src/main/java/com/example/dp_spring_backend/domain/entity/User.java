@@ -25,17 +25,36 @@ public class User implements UserDetails{
     @GeneratedValue
     @Column(name = "id")
     private Long id;
+
     @Column(name = "firstname")
     private String firstname;
+
     @Column(name = "lastname")
     private String lastname;
+
     @Column(name = "email")
     private String email;
+
     @Column(name = "password")
     private String password;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
     private RoleEnum role;
+
+    @Column(name="address")
+    private String address;
+
+    @Column(name="phone_number")
+    private String phoneNumber;
+
+    @Column(name="position")
+    private String position;
+
+    @Column(name="driving_license")
+    private String drivingLicense;
+
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -71,4 +90,5 @@ public class User implements UserDetails{
     public boolean isEnabled() {
         return true;
     }
+
 }

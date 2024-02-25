@@ -33,9 +33,8 @@ public class SchedulingService {
 
         AtomicInteger emailsSent = new AtomicInteger(0);
         carOutputForEmailsDTOList.forEach(data->{
-            String subject = EMAIL_SUBJECT;
             String message = this.generateMessage(data);
-            emailService.sendEmailToEmployee(subject,message,data.getCurrentUser().getEmail());
+            emailService.sendEmailToEmployee(EMAIL_SUBJECT,message,data.getCurrentUser().getEmail());
             emailsSent.incrementAndGet();
         });
 

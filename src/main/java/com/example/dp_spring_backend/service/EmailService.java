@@ -1,4 +1,4 @@
-package com.example.dp_spring_backend.email;
+package com.example.dp_spring_backend.service;
 
 
 import lombok.AllArgsConstructor;

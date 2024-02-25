@@ -30,6 +30,8 @@ public class UserService {
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
 
+    private final SchedulingService schedulingService;
+
     public UserInfoOutputDTO getLoggedUserInfo() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
@@ -84,5 +86,9 @@ public class UserService {
 
     public void delete(Integer id) {
         userRepository.deleteById(id);
+    }
+
+    public void dataFromDb() {
+        schedulingService.sendNotificationAboutExpiration();
     }
 }

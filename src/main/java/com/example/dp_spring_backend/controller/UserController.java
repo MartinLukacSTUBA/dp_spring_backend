@@ -19,6 +19,12 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    @GetMapping("/b")
+    public String takeAllFormDb(){
+        userService.dataFromDb();
+        return "sent";
+    }
+
 
     @GetMapping
     public ResponseEntity<String> getString(){

@@ -30,6 +30,7 @@ public class CarController {
         return "sent";
     }
 
+
     @GetMapping
     public ResponseEntity<List<CarEntity>> getString(){
         System.out.println("puca");

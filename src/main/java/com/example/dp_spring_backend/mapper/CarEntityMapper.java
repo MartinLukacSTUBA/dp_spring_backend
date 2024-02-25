@@ -4,6 +4,7 @@ import com.example.dp_spring_backend.domain.DTO.CarBasicInfoDTO;
 import com.example.dp_spring_backend.domain.DTO.input.CarUpdateInputDTO;
 import com.example.dp_spring_backend.domain.DTO.input.CreateCarInputDTO;
 import com.example.dp_spring_backend.domain.DTO.output.CarOutputDTO;
+import com.example.dp_spring_backend.domain.DTO.output.CarOutputForEmailsDTO;
 import com.example.dp_spring_backend.domain.entity.CarEntity;
 import com.example.dp_spring_backend.repository.UserRepository;
 import org.mapstruct.*;
@@ -50,4 +51,6 @@ public abstract class CarEntityMapper {
         @Mapping(target = "note",source = "inputDTO.note",nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE),
     })
     public abstract void inputDTOToEntity(@MappingTarget CarEntity carEntity, CarUpdateInputDTO inputDTO);
+
+    public abstract List<CarOutputForEmailsDTO> carEntityToCarOutputForEmailsDTO(List<CarEntity> carEntities);
 }

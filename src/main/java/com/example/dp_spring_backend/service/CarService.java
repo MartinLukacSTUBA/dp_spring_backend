@@ -5,6 +5,7 @@ import com.example.dp_spring_backend.domain.DTO.input.CarUpdateInputDTO;
 import com.example.dp_spring_backend.domain.DTO.input.CreateCarInputDTO;
 import com.example.dp_spring_backend.domain.DTO.output.CarOutputDTO;
 import com.example.dp_spring_backend.domain.entity.CarEntity;
+import com.example.dp_spring_backend.email.EmailService;
 import com.example.dp_spring_backend.exception.CarNotFoundException;
 import com.example.dp_spring_backend.mapper.CarEntityMapper;
 import com.example.dp_spring_backend.repository.CarEntityRepository;
@@ -22,6 +23,8 @@ public class CarService {
 
     private final CarEntityMapper carEntityMapper;
     private final CarEntityRepository carEntityRepository;
+
+    private final EmailService emailService;
 
 
     @Transactional
@@ -60,5 +63,9 @@ public class CarService {
 
     public void delete(Long id) {
         carEntityRepository.deleteById(id);
+    }
+
+    public void sent() {
+    emailService.sendEmailToEmployee("subject","message","martin.lukaccr@gmail.com");
     }
 }

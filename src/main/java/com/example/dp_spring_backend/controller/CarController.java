@@ -23,6 +23,13 @@ public class CarController {
 
     private final CarService carService;
 
+
+    @GetMapping("/a")
+    public String sendMail(){
+        carService.sent();
+        return "sent";
+    }
+
     @GetMapping
     public ResponseEntity<List<CarEntity>> getString(){
         System.out.println("puca");

@@ -37,7 +37,7 @@ public class UserController {
         return ResponseEntity.ok(userService.getLoggedUserInfo());
     }
 
-    @PostMapping("create")
+    @PostMapping("")
     public ResponseEntity<UserBasicInfoDTO> createUser(@RequestBody CreateUserInputDTO inputDTO){
         try{
             UserBasicInfoDTO userBasicInfoDTO = userService.create(inputDTO);
@@ -89,11 +89,11 @@ public class UserController {
 
 
 
-    @PostMapping
-    public ResponseEntity<String> postString(
-            @RequestBody String jozo) {
-        return ResponseEntity.ok(jozo + jozo);
-    }
+//    @PostMapping
+//    public ResponseEntity<String> postString(
+//            @RequestBody String jozo) {
+//        return ResponseEntity.ok(jozo + jozo);
+//    }
 
 
     @PutMapping

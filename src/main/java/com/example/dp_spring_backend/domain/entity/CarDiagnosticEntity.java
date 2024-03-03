@@ -45,8 +45,20 @@ public class CarDiagnosticEntity {
     @Column(name="start_address")
     private String startAddress;
 
+    @Column(name="start_latitude")
+    private String startLatitude;
+
+    @Column(name="start_longitude")
+    private String startLongitude;
+
     @Column(name="end_address")
     private String endAddress;
+
+    @Column(name="end_latitude")
+    private String endLatitude;
+
+    @Column(name = "end_longitude")
+    private String endLongitude;
 
     @ManyToOne
     @JoinColumn(name = "recorder_id", referencedColumnName = "id", nullable = false)

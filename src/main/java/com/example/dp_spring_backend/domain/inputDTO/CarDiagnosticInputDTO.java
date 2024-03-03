@@ -17,5 +17,6 @@ public class CarDiagnosticInputDTO {
     private Long averageThrottlePosition;
     private Long averageEngineLoad;
     private Long averageFuelPressure;
-
+    private String startAddress;
+    private String endAddress;
 }

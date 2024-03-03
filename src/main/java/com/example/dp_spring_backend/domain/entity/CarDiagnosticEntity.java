@@ -42,6 +42,12 @@ public class CarDiagnosticEntity {
     @Column(name="diagnostic_time_date")
     private LocalDateTime diagnosticTimeDate;
 
+    @Column(name="start_address")
+    private String startAddress;
+
+    @Column(name="end_address")
+    private String endAddress;
+
     @ManyToOne
     @JoinColumn(name = "recorder_id", referencedColumnName = "id", nullable = false)
     private User recorderId; // Represents the foreign key relationship

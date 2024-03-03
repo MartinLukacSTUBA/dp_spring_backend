@@ -40,6 +40,8 @@ public class CarDiagnosticService {
                 .averageFuelPressure(carDiagnosticInputDTO.getAverageFuelPressure())
                 .averageEngineTemperature(carDiagnosticInputDTO.getAverageEngineTemperature())
                 .averageThrottlePosition(carDiagnosticInputDTO.getAverageThrottlePosition())
+                .startAddress(carDiagnosticInputDTO.getStartAddress())
+                .endAddress(carDiagnosticInputDTO.getEndAddress())
                 .recorderId(userr)
                 .diagnosticTimeDate(LocalDateTime.now())
                 .build();

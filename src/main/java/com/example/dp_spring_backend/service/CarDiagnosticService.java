@@ -1,11 +1,11 @@
 package com.example.dp_spring_backend.service;
 
+import com.example.dp_spring_backend.domain.DTO.output.CarDiagnosticOutputDTO;
 import com.example.dp_spring_backend.domain.entity.CarDiagnosticEntity;
 import com.example.dp_spring_backend.domain.entity.User;
 import com.example.dp_spring_backend.domain.inputDTO.CarDiagnosticInputDTO;
 import com.example.dp_spring_backend.mapper.CarDiagnosticMapper;
 import com.example.dp_spring_backend.mapper.UserMapper;
-import com.example.dp_spring_backend.outputDTO.CarDiagnosticOutputDTO;
 import com.example.dp_spring_backend.outputDTO.UserInfoOutputDTO;
 import com.example.dp_spring_backend.repository.CarDiagnosticRepository;
 import com.example.dp_spring_backend.repository.UserRepository;

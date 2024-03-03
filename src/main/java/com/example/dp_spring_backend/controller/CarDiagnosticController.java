@@ -1,7 +1,7 @@
 package com.example.dp_spring_backend.controller;
 
+import com.example.dp_spring_backend.domain.DTO.output.CarDiagnosticOutputDTO;
 import com.example.dp_spring_backend.domain.inputDTO.CarDiagnosticInputDTO;
-import com.example.dp_spring_backend.outputDTO.CarDiagnosticOutputDTO;
 import com.example.dp_spring_backend.service.CarDiagnosticService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

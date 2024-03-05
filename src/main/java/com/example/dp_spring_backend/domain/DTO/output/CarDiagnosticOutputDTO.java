@@ -13,6 +13,7 @@ import lombok.Setter;
 public class CarDiagnosticOutputDTO {
 
     private Long id;
+    private String lastname;
     private Long averageSpeed;
     private Long averageRpm;
     private Long averageEngineTemperature;

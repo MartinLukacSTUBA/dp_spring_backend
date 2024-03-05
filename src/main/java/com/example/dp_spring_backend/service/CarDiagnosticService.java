@@ -72,4 +72,21 @@ public class CarDiagnosticService {
         }
         return null;
     }
+
+    public CarDiagnosticOutputDTO getCarDiagnosticById(Integer id) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        if (auth != null) {
+            UserDetails userDetails = (UserDetails) auth.getPrincipal();
+//            String userId = userDetails.getUsername(); // Assuming the username is used as the user's ID
+            User user = userRepository.findByEmail(userDetails.getUsername());
+            CarDiagnosticEntity carDiagnosticEntity = carDiagnosticRepository.findById(id).orElseThrow();
+            CarDiagnosticOutputDTO carDiagnosticOutputDTO = carDiagnosticMapper.toCarDiagnosticOutputDTO(carDiagnosticEntity);
+
+
+            return carDiagnosticOutputDTO;
+        }
+        return null;
+    }
 }

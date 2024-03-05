@@ -32,4 +32,9 @@ public class CarDiagnosticController {
     public ResponseEntity<List<CarDiagnosticOutputDTO>> getCarDiagnosticMadeByLoggedUser(){
         return ResponseEntity.ok().body(carDiagnosticService.getCarDiagnosticMadeByLoggedUser());
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<CarDiagnosticOutputDTO> getCarDiagnosticById(@PathVariable Integer id){
+        return ResponseEntity.ok().body(carDiagnosticService.getCarDiagnosticById(id));
+    }
 }

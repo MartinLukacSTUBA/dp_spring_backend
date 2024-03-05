@@ -80,9 +80,42 @@ public class UserService {
 
     public void update(Long id, CreateUserInputDTO inputDTO) {
         User user = userRepository.findById(id);
+        assignNullIfEmpty(inputDTO);
         userMapper.createDTOToEntity(user, inputDTO);
         userRepository.save(user);
     }
+
+    private void assignNullIfEmpty(CreateUserInputDTO inputDTO) {
+        if (isEmpty(inputDTO.getFirstname())) {
+            inputDTO.setFirstname(null);
+        }
+        if (isEmpty(inputDTO.getLastname())) {
+            inputDTO.setLastname(null);
+        }
+        if (isEmpty(inputDTO.getEmail())) {
+            inputDTO.setEmail(null);
+        }
+        if (inputDTO.getRole() == null) {
+            inputDTO.setRole(null);
+        }
+        if (isEmpty(inputDTO.getAddress())) {
+            inputDTO.setAddress(null);
+        }
+        if (isEmpty(inputDTO.getPhoneNumber())) {
+            inputDTO.setPhoneNumber(null);
+        }
+        if (isEmpty(inputDTO.getPosition())) {
+            inputDTO.setPosition(null);
+        }
+        if (isEmpty(inputDTO.getDrivingLicense())) {
+            inputDTO.setDrivingLicense(null);
+        }
+    }
+
+    private boolean isEmpty(String str) {
+        return str == null || str.trim().isEmpty();
+    }
+
 
     public void delete(Integer id) {
         userRepository.deleteById(id);

@@ -37,4 +37,10 @@ public class CarDiagnosticController {
     public ResponseEntity<CarDiagnosticOutputDTO> getCarDiagnosticById(@PathVariable Integer id){
         return ResponseEntity.ok().body(carDiagnosticService.getCarDiagnosticById(id));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteDiagnosticData(@PathVariable Integer id){
+        carDiagnosticService.deleteCarDiagnosticData(id);
+        return ResponseEntity.ok().build();
+    }
 }

@@ -89,4 +89,8 @@ public class CarDiagnosticService {
         }
         return null;
     }
+
+    public void deleteCarDiagnosticData(Integer id) {
+        carDiagnosticRepository.deleteById(id);
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.dp_spring_backend.service;
 
 import com.example.dp_spring_backend.domain.entity.User;
+import com.example.dp_spring_backend.enums.RoleEnum;
 import com.example.dp_spring_backend.mapper.UserMapper;
 import com.example.dp_spring_backend.outputDTO.UserInfoOutputDTO;
 import com.example.dp_spring_backend.repository.UserRepository;
@@ -33,5 +34,23 @@ public class TokenService {
         }
         return null;
     }
+    public RoleEnum getLoggedRole() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        if (auth != null) {
+            Object principal = auth.getPrincipal();
+            if (principal instanceof UserDetails) {
+                UserDetails userDetails = (UserDetails) principal;
+                User user = userRepository.findByEmail(userDetails.getUsername());
+                return user.getRole();
+            } else if (principal instanceof String) {
+                String username = (String) principal;
+                User user = userRepository.findByEmail(username);
+                return user.getRole();
+            }
+        }
+        return null;
+    }
+
 
 }

@@ -3,6 +3,7 @@ package com.example.dp_spring_backend.controller;
 import com.example.dp_spring_backend.domain.DTO.UserBasicInfoDTO;
 import com.example.dp_spring_backend.domain.DTO.input.CreateUserInputDTO;
 import com.example.dp_spring_backend.domain.DTO.output.UserOutputDTO;
+import com.example.dp_spring_backend.enums.RoleEnum;
 import com.example.dp_spring_backend.outputDTO.UserInfoOutputDTO;
 import com.example.dp_spring_backend.service.TokenService;
 import com.example.dp_spring_backend.service.UserService;
@@ -37,6 +38,11 @@ public class UserController {
     @GetMapping("/logged")
     public ResponseEntity<UserInfoOutputDTO> getUserInfo(){
         return ResponseEntity.ok(tokenService.getLoggedUserInfo());
+    }
+
+    @GetMapping("/role/logged")
+    public ResponseEntity<RoleEnum> getUserRole(){
+        return ResponseEntity.ok(tokenService.getLoggedRole());
     }
 
     @PostMapping("")

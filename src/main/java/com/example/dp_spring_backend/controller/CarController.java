@@ -1,6 +1,7 @@
 package com.example.dp_spring_backend.controller;
 
 import com.example.dp_spring_backend.domain.DTO.CarBasicInfoDTO;
+import com.example.dp_spring_backend.domain.DTO.IdNameDTO;
 import com.example.dp_spring_backend.domain.DTO.input.CarUpdateInputDTO;
 import com.example.dp_spring_backend.domain.DTO.input.CreateCarInputDTO;
 import com.example.dp_spring_backend.domain.DTO.output.CarOutputDTO;
@@ -75,6 +76,16 @@ public class CarController {
     public ResponseEntity<CarOutputDTO> getDetails(@PathVariable Long carId){
         try{
             CarOutputDTO carOutputDTO = carService.getCarDetailsDTO(carId);
+            return ResponseEntity.ok(carOutputDTO);
+        }catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,e.getMessage(),e);
+        }
+    }
+
+    @GetMapping("/logged-user")
+    public ResponseEntity<List<IdNameDTO>> getLoggedUserCars(){
+        try{
+            List<IdNameDTO> carOutputDTO = carService.getLoggedUserCars();
             return ResponseEntity.ok(carOutputDTO);
         }catch (Exception e){
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,e.getMessage(),e);

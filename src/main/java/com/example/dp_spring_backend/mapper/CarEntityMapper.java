@@ -1,6 +1,7 @@
 package com.example.dp_spring_backend.mapper;
 
 import com.example.dp_spring_backend.domain.DTO.CarBasicInfoDTO;
+import com.example.dp_spring_backend.domain.DTO.IdNameDTO;
 import com.example.dp_spring_backend.domain.DTO.input.CarUpdateInputDTO;
 import com.example.dp_spring_backend.domain.DTO.input.CreateCarInputDTO;
 import com.example.dp_spring_backend.domain.DTO.output.CarOutputDTO;
@@ -54,4 +55,8 @@ public abstract class CarEntityMapper {
 
 
     public abstract List<CarOutputForEmailsDTO> carEntityToCarOutputForEmailsDTO(List<CarEntity> carEntities);
+
+    public abstract IdNameDTO idNameDTO(CarEntity carEntity);
+
+    public abstract List<IdNameDTO> toIdNameDTOs(List<CarEntity> carEntities);
 }

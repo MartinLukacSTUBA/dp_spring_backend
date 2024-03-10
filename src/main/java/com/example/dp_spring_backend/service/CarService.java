@@ -1,6 +1,7 @@
 package com.example.dp_spring_backend.service;
 
 import com.example.dp_spring_backend.domain.DTO.CarBasicInfoDTO;
+import com.example.dp_spring_backend.domain.DTO.IdNameDTO;
 import com.example.dp_spring_backend.domain.DTO.input.CarUpdateInputDTO;
 import com.example.dp_spring_backend.domain.DTO.input.CreateCarInputDTO;
 import com.example.dp_spring_backend.domain.DTO.output.CarOutputDTO;
@@ -117,5 +118,11 @@ public class CarService {
         User user = userRepository.findById(tokenService.getLoggedUserInfo().getId());
         car.setCurrentUser(user);
         carEntityRepository.save(car);
+    }
+
+    public List<IdNameDTO> getLoggedUserCars() {
+        User user = userRepository.findById(tokenService.getLoggedUserInfo().getId());
+        List<CarEntity> carEntities = carEntityRepository.findByCurrentUser(user);
+        return carEntityMapper.toIdNameDTOs(carEntities);
     }
 }

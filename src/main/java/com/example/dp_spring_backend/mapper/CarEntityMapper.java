@@ -38,19 +38,20 @@ public abstract class CarEntityMapper {
 
 
     @Mappings({
-        @Mapping(target = "id",ignore = true),
-        @Mapping(target = "vim",ignore = true),
-        @Mapping(target = "name",source = "inputDTO.name",nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE),
-        @Mapping(target = "transmittionTypeEnum",source = "inputDTO.transmittionTypeEnum",nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE),
+        @Mapping(target = "id", ignore = true),
+        @Mapping(target = "vim", ignore = true),
+        @Mapping(target = "name", source = "inputDTO.name", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE),
+        @Mapping(target = "transmittionTypeEnum", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE),
         @Mapping(target = "currentUser", expression = "java(inputDTO.getUserId() != null ? userRepository.findById(inputDTO.getUserId()) : carEntity.getCurrentUser())"),
-        @Mapping(target = "vehicleNumberPlate",source = "inputDTO.vehicleNumberPlate",nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE),
-        @Mapping(target = "registration",ignore = true),
-        @Mapping(target = "registration_expiration",source = "inputDTO.registration_expiration",nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE),
-        @Mapping(target = "lastService",source = "inputDTO.lastService",nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE),
-        @Mapping(target = "fuel",source = "inputDTO.fuel",nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE),
-        @Mapping(target = "note",source = "inputDTO.note",nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE),
+        @Mapping(target = "vehicleNumberPlate", source = "inputDTO.vehicleNumberPlate", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE),
+        @Mapping(target = "registration", ignore = true),
+        @Mapping(target = "registration_expiration", source = "inputDTO.registration_expiration", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE),
+        @Mapping(target = "lastService", source = "inputDTO.lastService", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE),
+        @Mapping(target = "fuel", source = "inputDTO.fuel", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE),
+        @Mapping(target = "note", source = "inputDTO.note", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE),
     })
     public abstract void inputDTOToEntity(@MappingTarget CarEntity carEntity, CarUpdateInputDTO inputDTO);
+
 
     public abstract List<CarOutputForEmailsDTO> carEntityToCarOutputForEmailsDTO(List<CarEntity> carEntities);
 }

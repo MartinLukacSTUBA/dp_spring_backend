@@ -4,6 +4,7 @@ import com.example.dp_spring_backend.domain.DTO.UserBasicInfoDTO;
 import com.example.dp_spring_backend.domain.DTO.input.CreateUserInputDTO;
 import com.example.dp_spring_backend.domain.DTO.output.UserOutputDTO;
 import com.example.dp_spring_backend.outputDTO.UserInfoOutputDTO;
+import com.example.dp_spring_backend.service.TokenService;
 import com.example.dp_spring_backend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,7 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    private final TokenService tokenService;
     @GetMapping("/b")
     public String takeAllFormDb(){
         userService.dataFromDb();
@@ -34,7 +36,7 @@ public class UserController {
 
     @GetMapping("/logged")
     public ResponseEntity<UserInfoOutputDTO> getUserInfo(){
-        return ResponseEntity.ok(userService.getLoggedUserInfo());
+        return ResponseEntity.ok(tokenService.getLoggedUserInfo());
     }
 
     @PostMapping("")

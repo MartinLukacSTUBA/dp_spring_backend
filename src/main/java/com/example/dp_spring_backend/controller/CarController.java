@@ -72,6 +72,18 @@ public class CarController {
         }
     }
 
+    @GetMapping("/logged-user/all-basic-info")
+    public ResponseEntity<List<CarBasicInfoDTO>> getLoggedUserBasicInfoCarData(){
+        try{
+            List<CarBasicInfoDTO> carBasicInfoDTOList = carService.getLoggedUserBasicInfoCarData();
+            return ResponseEntity.ok(carBasicInfoDTOList);
+        }catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,e.getMessage(),e);
+        }
+    }
+
+
+
     @GetMapping("/details/{carId}")
     public ResponseEntity<CarOutputDTO> getDetails(@PathVariable Long carId){
         try{

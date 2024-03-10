@@ -125,4 +125,10 @@ public class CarService {
         List<CarEntity> carEntities = carEntityRepository.findByCurrentUser(user);
         return carEntityMapper.toIdNameDTOs(carEntities);
     }
+
+    public List<CarBasicInfoDTO> getLoggedUserBasicInfoCarData() {
+        User user = userRepository.findById(tokenService.getLoggedUserInfo().getId());
+        List<CarEntity> carEntities = carEntityRepository.findByCurrentUser(user);
+        return carEntityMapper.toListBasicInfoDTO(carEntities);
+    }
 }

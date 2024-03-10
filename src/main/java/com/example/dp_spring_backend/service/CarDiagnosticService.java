@@ -2,6 +2,7 @@ package com.example.dp_spring_backend.service;
 
 import com.example.dp_spring_backend.domain.DTO.output.CarDiagnosticOutputDTO;
 import com.example.dp_spring_backend.domain.entity.CarDiagnosticEntity;
+import com.example.dp_spring_backend.domain.entity.CarEntity;
 import com.example.dp_spring_backend.domain.entity.User;
 import com.example.dp_spring_backend.domain.inputDTO.CarDiagnosticInputDTO;
 import com.example.dp_spring_backend.mapper.CarDiagnosticMapper;
@@ -30,8 +31,11 @@ public class CarDiagnosticService {
     private final UserMapper userMapper;
     private final CarDiagnosticMapper carDiagnosticMapper;
 
+    private final CarService carService;
+
     public void uploadCarDiagnosticEntity(CarDiagnosticInputDTO carDiagnosticInputDTO) {
         UserInfoOutputDTO userInfoOutputDTO = userService.getLoggedUserInfo();
+        CarEntity carEntity = carService.findById(carDiagnosticInputDTO.getCarId());
         User userr = userRepository.findByEmail(userInfoOutputDTO.getEmail());
         var carDiagnosticData = CarDiagnosticEntity.builder()
                 .averageRpm(carDiagnosticInputDTO.getAverageRpm())
@@ -48,6 +52,7 @@ public class CarDiagnosticService {
                 .endLongitude(carDiagnosticInputDTO.getEndLongitude())
                 .recorderId(userr)
                 .diagnosticTimeDate(LocalDateTime.now())
+                .carId(carEntity)
                 .build();
 
         carDiagnosticRepository.save(carDiagnosticData);

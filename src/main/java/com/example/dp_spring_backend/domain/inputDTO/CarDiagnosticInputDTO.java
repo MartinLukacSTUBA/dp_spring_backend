@@ -23,4 +23,5 @@ public class CarDiagnosticInputDTO {
     private String endAddress;
     private String endLatitude;
     private String endLongitude;
+    private Long carId;
 }

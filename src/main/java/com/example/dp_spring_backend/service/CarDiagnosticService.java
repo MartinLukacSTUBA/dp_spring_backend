@@ -61,7 +61,7 @@ public class CarDiagnosticService {
             UserDetails userDetails = (UserDetails) auth.getPrincipal();
 //            String userId = userDetails.getUsername(); // Assuming the username is used as the user's ID
             User user = userRepository.findByEmail(userDetails.getUsername());
-            List<CarDiagnosticEntity> carDiagnosticEntityList = carDiagnosticRepository.findByRecorderId_Id(user.getId());
+            List<CarDiagnosticEntity> carDiagnosticEntityList = carDiagnosticRepository.findByRecorderId_IdOrderByRecorderId_LastnameAscDiagnosticTimeDateAscStartAddressAsc(user.getId());
 
             List<CarDiagnosticOutputDTO> carDiagnosticOutputDTOList = carDiagnosticEntityList.stream()
                     .map(carDiagnosticMapper::toCarDiagnosticOutputDTO)
@@ -71,6 +71,14 @@ public class CarDiagnosticService {
            // return carDiagnosticMapper.toCarDiagnosticOutputDTOList(carDiagnosticRepository.findByRecorderId_Id(user.getId()));
         }
         return null;
+    }
+
+    public List<CarDiagnosticOutputDTO> getAllCarDiagnosticsOrderedByUserName() {
+        List<CarDiagnosticEntity> carDiagnosticEntityList = carDiagnosticRepository.findAll_OrderByRecorderId_LastnameAscDiagnosticTimeDateAsc();
+        List<CarDiagnosticOutputDTO> carDiagnosticOutputDTOList = carDiagnosticEntityList.stream()
+            .map(carDiagnosticMapper::toCarDiagnosticOutputDTO)
+            .toList();
+        return carDiagnosticOutputDTOList;
     }
 
     public CarDiagnosticOutputDTO getCarDiagnosticById(Integer id) {
@@ -93,4 +101,6 @@ public class CarDiagnosticService {
     public void deleteCarDiagnosticData(Integer id) {
         carDiagnosticRepository.deleteById(id);
     }
+
+
 }

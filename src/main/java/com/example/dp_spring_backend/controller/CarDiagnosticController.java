@@ -28,9 +28,14 @@ public class CarDiagnosticController {
     }
 
 
-    @GetMapping
+    @GetMapping("/logged-user")
     public ResponseEntity<List<CarDiagnosticOutputDTO>> getCarDiagnosticMadeByLoggedUser(){
         return ResponseEntity.ok().body(carDiagnosticService.getCarDiagnosticMadeByLoggedUser());
+    }
+
+    @GetMapping("")
+    public ResponseEntity<List<CarDiagnosticOutputDTO>> getAllCarDiagnosticsOrderedByUserName(){
+        return ResponseEntity.ok().body(carDiagnosticService.getAllCarDiagnosticsOrderedByUserName());
     }
 
     @GetMapping("/{id}")

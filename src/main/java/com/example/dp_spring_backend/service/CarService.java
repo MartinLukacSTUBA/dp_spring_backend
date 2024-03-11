@@ -18,6 +18,7 @@ import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -41,7 +42,14 @@ public class CarService {
 
     public List<CarBasicInfoDTO> getAllBasicInfoDTO() {
         List<CarEntity> allCars = carEntityRepository.findAllByOrderByIdAsc();
-        return carEntityMapper.toListBasicInfoDTO(allCars);
+        List<CarBasicInfoDTO> carBasicInfoDTOList = carEntityMapper.toListBasicInfoDTO(allCars);
+        Long loggedUserId = tokenService.getLoggedUserInfo().getId();;
+        carBasicInfoDTOList.forEach(dto-> {
+            CarEntity car = carEntityRepository.findById(dto.getId()).orElseThrow();
+            dto.setOwned(Objects.equals(car.getCurrentUser().getId(), loggedUserId));
+
+        });
+        return carBasicInfoDTOList;
     }
 
     public CarOutputDTO getCarDetailsDTO(Long carId) throws ChangeSetPersister.NotFoundException {

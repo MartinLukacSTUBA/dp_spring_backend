@@ -14,5 +14,6 @@ public class CarBasicInfoDTO {
     private Long id;
     private String name;
     private String vehicleNumberPlate;
+    private Boolean owned;
 
 }

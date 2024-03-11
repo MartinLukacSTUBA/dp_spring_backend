@@ -14,6 +14,7 @@ public class CarDiagnosticOutputDTO {
 
     private Long id;
     private String lastname;
+    private String carName;
     private Long averageSpeed;
     private Long averageRpm;
     private Long averageEngineTemperature;

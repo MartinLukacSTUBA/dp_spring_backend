@@ -64,7 +64,6 @@ public class CarDiagnosticService {
 
         if (auth != null) {
             UserDetails userDetails = (UserDetails) auth.getPrincipal();
-//            String userId = userDetails.getUsername(); // Assuming the username is used as the user's ID
             User user = userRepository.findByEmail(userDetails.getUsername());
             List<CarDiagnosticEntity> carDiagnosticEntityList = carDiagnosticRepository.findByRecorderId_IdOrderByRecorderId_LastnameAscDiagnosticTimeDateAscStartAddressAsc(user.getId());
 
@@ -73,7 +72,6 @@ public class CarDiagnosticService {
                     .toList();
 
             return carDiagnosticOutputDTOList;
-           // return carDiagnosticMapper.toCarDiagnosticOutputDTOList(carDiagnosticRepository.findByRecorderId_Id(user.getId()));
         }
         return null;
     }
@@ -92,7 +90,6 @@ public class CarDiagnosticService {
 
         if (auth != null) {
             UserDetails userDetails = (UserDetails) auth.getPrincipal();
-//            String userId = userDetails.getUsername(); // Assuming the username is used as the user's ID
             User user = userRepository.findByEmail(userDetails.getUsername());
             CarDiagnosticEntity carDiagnosticEntity = carDiagnosticRepository.findById(id).orElseThrow();
             CarDiagnosticOutputDTO carDiagnosticOutputDTO = carDiagnosticMapper.toCarDiagnosticOutputDTO(carDiagnosticEntity);

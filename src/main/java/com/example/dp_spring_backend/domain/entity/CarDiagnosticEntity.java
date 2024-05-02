@@ -62,9 +62,9 @@ public class CarDiagnosticEntity {
 
     @ManyToOne
     @JoinColumn(name = "recorder_id", referencedColumnName = "id", nullable = false)
-    private User recorderId; // Represents the foreign key relationship
+    private User recorderId;
 
     @ManyToOne
     @JoinColumn(name = "car_id", referencedColumnName = "id", nullable = false)
-    private CarEntity carId; // Represents the foreign key relationship
+    private CarEntity carId;
 }

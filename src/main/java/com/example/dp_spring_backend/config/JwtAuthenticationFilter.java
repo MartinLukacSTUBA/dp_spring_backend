@@ -34,8 +34,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             filterChain.doFilter(request,response);
             return;
         }
-        jwt = authHeader.substring(7);//pos 7 bcs bearer 7 letters
-        userEmail=jwtService.extractUserName(jwt);//todo extract the userEmail from JWT token;
+        jwt = authHeader.substring(7);
+        userEmail=jwtService.extractUserName(jwt);
         if(userEmail!= null && SecurityContextHolder.getContext().getAuthentication()==null){
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
             if(jwtService.isTokenValid(jwt,userDetails)){

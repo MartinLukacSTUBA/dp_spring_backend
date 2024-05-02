@@ -20,10 +20,10 @@ public class CarDiagnosticController {
     public ResponseEntity<?> uploadCarDiagnosticEntity(@RequestBody CarDiagnosticInputDTO carDiagnosticInputDTO) {
         try {
             carDiagnosticService.uploadCarDiagnosticEntity(carDiagnosticInputDTO);
-            return ResponseEntity.ok().build(); // Status code 200 if everything is fine
+            return ResponseEntity.ok().build();
         } catch (Exception e) {
-            e.printStackTrace(); // Log the error for debugging purposes
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal server error"); // Status code 500 and error message
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal server error");
         }
     }
 

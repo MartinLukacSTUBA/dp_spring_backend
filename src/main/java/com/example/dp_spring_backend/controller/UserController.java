@@ -29,12 +29,6 @@ public class UserController {
     }
 
 
-    @GetMapping
-    public ResponseEntity<String> getString(){
-        System.out.println("puca");
-        return ResponseEntity.ok("Hello");
-    }
-
     @GetMapping("/logged")
     public ResponseEntity<UserInfoOutputDTO> getUserInfo(){
         return ResponseEntity.ok(tokenService.getLoggedUserInfo());
@@ -93,21 +87,4 @@ public class UserController {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,e.getMessage(),e);
         }
     }
-
-
-
-
-//    @PostMapping
-//    public ResponseEntity<String> postString(
-//            @RequestBody String jozo) {
-//        return ResponseEntity.ok(jozo + jozo);
-//    }
-
-
-    @PutMapping
-    public ResponseEntity<String>putMapping(
-            @RequestBody String jozo) {
-        return ResponseEntity.ok("Hello");
-    }
-
 }

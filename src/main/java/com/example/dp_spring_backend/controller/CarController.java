@@ -34,7 +34,6 @@ public class CarController {
 
     @GetMapping
     public ResponseEntity<List<CarEntity>> getString(){
-        System.out.println("puca");
         List<CarEntity>a = new ArrayList<>();
 
         CarEntity car = new CarEntity();
